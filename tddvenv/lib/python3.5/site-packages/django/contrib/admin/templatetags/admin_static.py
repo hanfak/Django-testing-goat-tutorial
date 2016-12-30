@@ -1,11 +1,11 @@
-from django.conf import settings
 from django.template import Library
+from django.templatetags.static import static as _static
 
 register = Library()
 
-if 'django.contrib.staticfiles' in settings.INSTALLED_APPS:
-    from django.contrib.staticfiles.templatetags.staticfiles import static
-else:
-    from django.templatetags.static import static
 
-static = register.simple_tag(static)
+@register.simple_tag
+def static(path):
+    # Backwards compatibility alias for django.templatetags.static.static().
+    # Deprecation should start in Django 2.0.
+    return _static(path)

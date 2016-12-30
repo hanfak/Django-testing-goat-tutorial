@@ -1,10 +1,10 @@
-Additional stuff to get it working
+# Additional stuff to get it working
 
-Before:
+## Before:
 
 Create virtual environment, and install django and selenium as per book instructions
 
-Chapter 1.1
+## Chapter 1.1
 
 Need to download gecko driver for firefox to run with selenium. This needs to be unzipped and moved to /usr/local/bin, use CLI `mv <file> /usr/local/bin`
 
@@ -14,4 +14,12 @@ To create project, `django-admin startproject superlists`
 
 To leave virtual environment `deactivate`
 
-Chapter 1.2
+## Chapter 1.2
+
+## Chapter 1.3
+
+`AttributeError: module 'html.parser' has no attribute 'HTMLParseError'`
+
+occurs, then upgrade django `pip install -U django`
+
+Upgrade selenium
