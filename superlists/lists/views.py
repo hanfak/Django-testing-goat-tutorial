@@ -10,6 +10,6 @@ def home_page(request):
     item.save()
 
     context = {
-        'new_item_text': request.POST.get('item_text', ''),
+        'new_item_text': item.text,
     }
     return render(request, 'home.html', context)
