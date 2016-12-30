@@ -96,3 +96,10 @@
 [GFX1-]: Receive IPC close with reason=AbnormalShutdown
 [Child 21407] ###!!! ABORT: Aborting on channel error.: file /builds/slave/m-rel-m64-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2056
 [Child 21407] ###!!! ABORT: Aborting on channel error.: file /builds/slave/m-rel-m64-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2056
+1483112112818	geckodriver	INFO	Listening on 127.0.0.1:63716
+1483112113817	mozprofile::profile	INFO	Using profile path /var/folders/_j/js6jfr753dq9p2w5jj3w2kr80000gn/T/rust_mozprofile.GjHTPregT5db
+1483112113818	geckodriver::marionette	INFO	Starting browser /Applications/Firefox.app/Contents/MacOS/firefox-bin
+1483112113821	geckodriver::marionette	INFO	Connecting to Marionette on localhost:63722
+1483112114729	Marionette	INFO	Listening on port 63722
+[Child 22134] ###!!! ABORT: Aborting on channel error.: file /builds/slave/m-rel-m64-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2056
+[Child 22134] ###!!! ABORT: Aborting on channel error.: file /builds/slave/m-rel-m64-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2056

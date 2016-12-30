@@ -23,3 +23,7 @@ To leave virtual environment `deactivate`
 occurs, then upgrade django `pip install -U django`
 
 Upgrade selenium
+
+## Chapter 1.4
+
+add `print(repr(html))` in test method to get what is printed out, for debugging
