@@ -27,3 +27,5 @@ Upgrade selenium
 ## Chapter 1.4
 
 add `print(repr(html))` in test method to get what is printed out, for debugging
+
+Use functional tests to drive html content in templates
