@@ -38,3 +38,7 @@ time.sleep(10)
 ```
 
 Place in functional tests to stop browser and see what is happening
+
+Make sure firefox esr version is installed and
+
+'python manage.py flush' to clear db

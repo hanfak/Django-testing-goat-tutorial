@@ -6,7 +6,7 @@ import unittest
 class NewVisitorTest(unittest.TestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(3)
+        self.browser.implicitly_wait(10)
 
     def tearDown(self):
         self.browser.quit()
@@ -17,6 +17,8 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn(row_text, [row.text for row in rows])
 
     def test_can_start_a_list_and_retrieve_it_later(self):
+        import time
+        time.sleep(2)
         # Han has heard about a cool new online to-do app. He goes
         # to check out its homepage
         self.browser.get('http://localhost:8000')
@@ -47,8 +49,8 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys(Keys.ENTER)
 
         # The page updates again, and now shows both items on his list
-        self.check_for_row_in_list_table('1: Buy peacock feathers')
         self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
+        self.check_for_row_in_list_table('1: Buy peacock feathers')
 
         # Han wonders whether the site will remember his list. Then he sees
         # that the site has generated a unique URL for his -- there is some
