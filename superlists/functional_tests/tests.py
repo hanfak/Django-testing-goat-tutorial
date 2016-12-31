@@ -53,14 +53,56 @@ class NewVisitorTest(LiveServerTestCase):
         self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
         self.check_for_row_in_list_table('1: Buy peacock feathers')
 
-        # Han wonders whether the site will remember his list. Then he sees
-        # that the site has generated a unique URL for his -- there is some
-        # explanatory text to that effect.
-        self.fail('Finish the test!')
-
-        # He visits that URL - his to-do list is still there.
-
         # Satisfied, he goes back to sleep
 
-if __name__ == '__main__':
-    unittest.main(warnings='ignore')
+    # Han wonders whether the site will remember his list. Then he sees
+    # that the site has generated a unique URL for his -- there is some
+    # explanatory text to that effect.
+
+    # He visits that URL - his to-do list is still there.
+    def test_multiple_users_can_start_lists_at_different_urls(self):
+
+        # Han start a new todo list
+        self.browser.get(self.live_server_url)
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Buy peacock feathers')
+        inputbox.send_keys(Keys.ENTER)
+        self.check_for_row_in_list_table('1: Buy peacock feathers')
+
+        # He notices that his list has a unique URL
+        edith_list_url = self.browser.current_url
+        self.assertRegex(edith_list_url, '/lists/.+')
+
+        # Now a new user, Francis, comes along to the site.
+
+        ## We use a new browser session to make sure that no information
+        ## of Han's is coming through from cookies etc
+        self.browser.quit()
+        self.browser = webdriver.Firefox()
+
+        # Francis visits the home page.  There is no sign of Han's
+        # list
+        self.browser.get(self.live_server_url)
+        page_text = self.browser.find_element_by_tag_name('body').text
+        self.assertNotIn('Buy peacock feathers', page_text)
+        self.assertNotIn('make a fly', page_text)
+
+        # Francis starts a new list by entering a new item. He
+        # is less interesting than Han...
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Buy milk')
+        inputbox.send_keys(Keys.ENTER)
+        self.check_for_row_in_list_table('1: Buy milk')
+
+        # Francis gets his own unique URL
+        francis_list_url = self.browser.current_url
+        self.assertRegex(francis_list_url, '/lists/.+')
+        self.assertNotEqual(francis_list_url, edith_list_url)
+
+        # Again, there is no trace of Edith's list
+        page_text = self.browser.find_element_by_tag_name('body').text
+        self.assertNotIn('Buy peacock feathers', page_text)
+        self.assertIn('Buy milk', page_text)
+
+        # Satisfied, they both go back to sleep
+        # self.fail('Finish the test!')

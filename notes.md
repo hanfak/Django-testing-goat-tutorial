@@ -42,3 +42,7 @@ Place in functional tests to stop browser and see what is happening
 Make sure firefox esr version is installed and
 
 'python manage.py flush' to clear db
+
+## Chapter 1.6
+
+Using LiveServerTestCase creates test database, no need to flush database, and creates a new port address server is listenning on
