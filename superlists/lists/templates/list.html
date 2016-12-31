@@ -4,7 +4,7 @@
     <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
   {% endfor %}
 </table>
-<form method="POST" action="/">
+<form method="POST" action="/lists/new">
     {% csrf_token %}
     <input name="item_text" id="id_new_item" placeholder="Enter a to-do item" />
 </form>
