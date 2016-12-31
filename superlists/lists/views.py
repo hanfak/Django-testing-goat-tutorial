@@ -10,8 +10,7 @@ def home_page(request):
         Item.objects.create(text=new_item_text)
         return redirect('/lists/the-only-list-in-the-world/')
 
-    context = {'items' : Item.objects.all()}
-    return render(request, 'home.html', context)
+    return render(request, 'home.html')
 
 def view_list(request):
     items = Item.objects.all()
