@@ -15,3 +15,7 @@ Support more than one list!
   Add URLs for adding a new item to an existing list via POST
 
 Separate template for viewing from adding
+
+Add URLs for adding a new item to an existing list via POST
+
+Refactor away some duplication in urls.py
