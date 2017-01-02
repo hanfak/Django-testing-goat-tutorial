@@ -98,7 +98,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertRegex(francis_list_url, '/lists/.+')
         self.assertNotEqual(francis_list_url, edith_list_url)
 
-        # Again, there is no trace of Edith's list
+        # Again, there is no trace of Han's list
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertIn('Buy milk', page_text)
@@ -128,3 +128,19 @@ class NewVisitorTest(StaticLiveServerTestCase):
             512,
             delta=5
         )
+
+    def test_cannot_add_empty_list_items(self):
+        # Han goes to the home page and accidentally tries to submit
+        # an empty list item. He hits Enter on the empty input box
+
+        # The home page refreshes, and there is an error message saying
+        # that list items cannot be blank
+
+        # He tries again with some text for the item, which now works
+
+        # Perversely, he now decides to submit a second blank list item
+
+        # He receives a similar warning on the list page
+
+        # And he can correct it by filling some text in
+        self.fail('write me!')
