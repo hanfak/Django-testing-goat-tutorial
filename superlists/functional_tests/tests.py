@@ -3,8 +3,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 import unittest
+from unittest import skip
 
-class NewVisitorTest(StaticLiveServerTestCase):
+
+class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(10)
@@ -17,6 +19,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn(row_text, [row.text for row in rows])
 
+
+class NewVisitorTest(FunctionalTest):
     def test_can_start_a_list_and_retrieve_it_later(self):
 
         # Han has heard about a cool new online to-do app. He goes
@@ -106,6 +110,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         # Satisfied, they both go back to sleep
         # self.fail('Finish the test!')
 
+class LayoutAndStylingTest(FunctionalTest):
     def test_layout_and_styling(self):
         # Han goes to the home page
         self.browser.get(self.live_server_url)
@@ -129,6 +134,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
             delta=5
         )
 
+class ItemValidationTest(FunctionalTest):
+    @skip
     def test_cannot_add_empty_list_items(self):
         # Han goes to the home page and accidentally tries to submit
         # an empty list item. He hits Enter on the empty input box
