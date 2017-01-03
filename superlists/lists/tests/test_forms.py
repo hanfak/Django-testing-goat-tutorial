@@ -13,10 +13,6 @@ class ItemFormTest(TestCase):
         form = ItemForm()
         self.assertIn('class="form-control input-lg"', form.as_p())
 
-    # def test_form_validation_for_blank_items(self):
-    #     form = ItemForm(data={'text': ''})
-    #     form.save()
-
     def test_form_validation_for_blank_items(self):
         form = ItemForm(data={'text': ''})
         self.assertFalse(form.is_valid())
