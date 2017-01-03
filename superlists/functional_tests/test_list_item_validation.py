@@ -7,11 +7,6 @@ class ItemValidationTest(FunctionalTest):
         self.browser.get(self.live_server_url)
         self.get_item_input_box().send_keys('\n')
 
-        # The home page refreshes, and there is an error message saying
-        # that list items cannot be blank
-        # error = self.browser.find_element_by_css_selector('.has-error')
-        # self.assertEqual(error.text, "You can't have an empty list item")
-
         # The browser intercepts the request, and does not load the
         # list page
         self.assertNotIn(
@@ -26,11 +21,6 @@ class ItemValidationTest(FunctionalTest):
         # Perversely, he now decides to submit a second blank list item
         self.get_item_input_box().send_keys('\n')
 
-        # He receives a similar warning on the list page
-        # self.check_for_row_in_list_table('1: Buy milk')
-        # error = self.browser.find_element_by_css_selector('.has-error')
-        # self.assertEqual(error.text, "You can't have an empty list item")
-
         # Again, the browser will not comply
         self.check_for_row_in_list_table('1: Buy milk')
         rows = self.browser.find_elements_by_css_selector('#id_list_table tr')
@@ -40,3 +30,17 @@ class ItemValidationTest(FunctionalTest):
         self.get_item_input_box().send_keys('Make tea\n')
         self.check_for_row_in_list_table('1: Buy milk')
         self.check_for_row_in_list_table('2: Make tea')
+
+    def test_cannot_add_duplicate_items(self):
+        # Han goes to the home page and starts a new list
+        self.browser.get(self.live_server_url)
+        self.get_item_input_box().send_keys('Buy wellies\n')
+        self.check_for_row_in_list_table('1: Buy wellies')
+
+        # HE accidentally tries to enter a duplicate item
+        self.get_item_input_box().send_keys('Buy wellies\n')
+
+        # HE sees a helpful error message
+        self.check_for_row_in_list_table('1: Buy wellies')
+        error = self.browser.find_element_by_css_selector('.has-error')
+        self.assertEqual(error.text, "You've already got this in your list")
